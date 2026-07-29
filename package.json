@@ -1,0 +1,10 @@
+{
+  "name": "tab-jumper",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check background.js && node --check history-model.js && node --check popup/popup.js"
+  }
+}
