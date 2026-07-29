@@ -16,7 +16,29 @@
         </div>
       </header>
 
-      <section class="controls" aria-label="Tab history controls">
+      <fieldset class="mode-picker">
+        <legend>Navigation mode</legend>
+        <div class="mode-options">
+          <label class="mode-option">
+            <input type="radio" name="mode" value="history" />
+            <span>History</span>
+          </label>
+          <label class="mode-option">
+            <input type="radio" name="mode" value="recent" />
+            <span>Last two tabs</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <p id="mode-description" class="mode-description">
+        Move through your complete tab trail.
+      </p>
+
+      <section
+        id="history-controls"
+        class="controls"
+        aria-label="Tab history controls"
+      >
         <button id="back-button" class="nav-button" type="button">
           <span class="arrow" aria-hidden="true">←</span>
           <span class="button-copy">
@@ -30,6 +52,25 @@
           <span class="button-copy">
             <strong>Forward</strong>
             <kbd id="forward-shortcut">Loading…</kbd>
+          </span>
+        </button>
+      </section>
+
+      <section
+        id="recent-controls"
+        class="controls controls--single"
+        aria-label="Recent tab control"
+        hidden
+      >
+        <button
+          id="recent-button"
+          class="nav-button nav-button--wide"
+          type="button"
+        >
+          <span class="arrow" aria-hidden="true">↔</span>
+          <span class="button-copy">
+            <strong>Switch tab</strong>
+            <kbd id="recent-shortcut">Loading…</kbd>
           </span>
         </button>
       </section>
