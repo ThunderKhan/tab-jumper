@@ -5,12 +5,12 @@
 <h1 align="center">Tab Jumper</h1>
 
 <p align="center">
-  Navigate backward and forward through the Chrome tabs you actually visited.
+  Navigate your tab history or instantly toggle between your two latest tabs.
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white" alt="Chrome Manifest V3">
-  <img src="https://img.shields.io/badge/version-1.0.0-6958E7" alt="Version 1.0.0">
+  <img src="https://img.shields.io/badge/version-1.1.0-6958E7" alt="Version 1.1.0">
   <img src="https://img.shields.io/badge/dependencies-none-2EA44F" alt="No dependencies">
 </p>
 
@@ -21,13 +21,16 @@ Chrome's existing tab shortcuts solve a different problem:
 - `Ctrl + Tab` moves through tabs in their tab-strip order.
 - `Ctrl + 1–8` works only when you already know a tab's position.
 
-Tab Jumper remembers the order in which you **visited** tabs. It gives tab
-switching the same Back and Forward behavior that browsers already provide for
-pages.
+Tab Jumper remembers the order in which you **visited** tabs. You can retrace
+your complete tab history or use one shortcut to alternate between your two
+most recently active tabs.
 
 ## Features
 
 - Navigate backward and forward through visited tabs.
+- Toggle between the two latest tabs using one shortcut.
+- Choose a navigation mode from the extension popup.
+- Preserve the selected mode after restarting the browser.
 - Continue a trail across multiple Chrome windows.
 - Automatically remove closed tabs from the trail.
 - Discard stale forward history after manually choosing a new tab.
@@ -36,7 +39,9 @@ pages.
 - Run without external dependencies, analytics, or network requests.
 - Access no page contents, URLs, titles, or conventional browser history.
 
-## How it works
+## Navigation modes
+
+### History
 
 Suppose you visit these tabs:
 
@@ -55,6 +60,23 @@ Your trail behaves like this:
 
 This is visit-order navigation—not tab-strip-order navigation.
 
+### Last two tabs
+
+Suppose you move from tab A to tab B:
+
+```text
+A → B
+```
+
+Each press of the **Switch tab** shortcut now alternates between them:
+
+```text
+B → A → B → A
+```
+
+If you manually visit tab C, the active pair becomes B and C. This mode behaves
+like an `Alt + Tab` switcher for browser tabs.
+
 ## Installation
 
 Tab Jumper is currently installed as an unpacked extension:
@@ -72,17 +94,23 @@ Tab Jumper is currently installed as an unpacked extension:
 | --- | --- | --- |
 | Previous visited tab | `Ctrl + Shift + Left` | `Command + Shift + Left` |
 | Next visited tab | `Ctrl + Shift + Right` | `Command + Shift + Right` |
+| Toggle the last two tabs | `Ctrl + Shift + Space` | `Command + Shift + Space` |
 
 Chrome may leave a suggested shortcut unassigned when it conflicts with another
 extension or browser command. Open `chrome://extensions/shortcuts`, or select
 **Change shortcuts** in the Tab Jumper popup, to assign different keys.
 
+Only the shortcuts belonging to the selected navigation mode perform an action.
+
 ## Privacy
 
 Tab Jumper requests only Chrome's `storage` permission.
 
-It stores numeric tab and window identifiers in `chrome.storage.session`.
-Session storage is temporary, so the trail resets after Chrome is fully closed.
+It stores numeric tab and window identifiers in `chrome.storage.session` and
+stores the selected navigation mode in `chrome.storage.local`. Session storage
+is temporary, so the actual tab trail resets after Chrome is fully closed. The
+saved preference contains only `history` or `recent`.
+
 The extension does **not**:
 
 - Read or modify webpage contents.
@@ -112,8 +140,8 @@ tab-jumper/
   history engine.
 - `history-model.js` contains the pure, testable state transitions.
 - `popup/` contains the extension interface.
-- `test/` verifies navigation, branching, tab cleanup, replacement, and the
-  history-size limit.
+- `test/` verifies navigation, two-tab toggling, branching, tab cleanup,
+  replacement, and the history-size limit.
 
 ## Development
 
