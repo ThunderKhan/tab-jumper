@@ -8,6 +8,7 @@ import {
   pruneToOpenTabs,
   removeTab,
   replaceTab,
+  toggleRecentTab,
   visitTab,
 } from "../history-model.js";
 
@@ -24,8 +25,10 @@ test("visits, goes backward, and goes forward", () => {
   assert.deepEqual(getStatus(movement.state), {
     canGoBack: true,
     canGoForward: true,
+    canToggleRecent: true,
     count: 3,
     position: 2,
+    recentCount: 2,
   });
 
   movement = moveCursor(movement.state, 1);
@@ -53,6 +56,35 @@ test("repeated activation of the current tab is ignored", () => {
   assert.deepEqual(state.entries, [tab(1)]);
 });
 
+test("one action alternates between the two most recent tabs", () => {
+  let state = { entries: [], cursor: -1 };
+  state = visitTab(state, tab(1));
+  state = visitTab(state, tab(2));
+  state = visitTab(state, tab(3));
+
+  let movement = toggleRecentTab(state);
+  assert.equal(movement.target.tabId, 2);
+  assert.deepEqual(
+    movement.state.recentTabs.map((entry) => entry.tabId),
+    [3, 2],
+  );
+
+  movement = toggleRecentTab(movement.state);
+  assert.equal(movement.target.tabId, 3);
+  assert.deepEqual(
+    movement.state.recentTabs.map((entry) => entry.tabId),
+    [2, 3],
+  );
+});
+
+test("recent-tab toggling waits until two different tabs have been visited", () => {
+  const state = visitTab({ entries: [], cursor: -1 }, tab(1));
+  const movement = toggleRecentTab(state);
+
+  assert.equal(movement.target, null);
+  assert.equal(getStatus(state).canToggleRecent, false);
+});
+
 test("closed tabs are removed while preserving the current position", () => {
   let state = {
     entries: [tab(1), tab(2), tab(3), tab(4)],
@@ -69,6 +101,10 @@ test("closed tabs are removed while preserving the current position", () => {
   state = pruneToOpenTabs(state, new Set([1, 3]));
   assert.equal(state.cursor, 1);
   assert.equal(state.entries[state.cursor].tabId, 3);
+  assert.deepEqual(
+    state.recentTabs.map((entry) => entry.tabId),
+    [3],
+  );
 });
 
 test("Chrome tab replacements retain history position", () => {
