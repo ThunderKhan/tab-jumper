@@ -23,6 +23,10 @@ button {
   font: inherit;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .panel {
   padding: 20px;
 }
@@ -31,7 +35,7 @@ button {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .logo {
@@ -48,16 +52,86 @@ h1 {
 }
 
 .header p,
-.footer p {
+.footer p,
+.mode-description {
   margin: 0;
   color: #9ea8c7;
   font-size: 12px;
+}
+
+.mode-picker {
+  min-width: 0;
+  margin: 0 0 8px;
+  padding: 0;
+  border: 0;
+}
+
+.mode-picker legend {
+  margin-bottom: 7px;
+  color: #7f8aaa;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mode-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid #293253;
+  border-radius: 12px;
+  background: rgb(15 21 40 / 82%);
+}
+
+.mode-option {
+  cursor: pointer;
+}
+
+.mode-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mode-option span {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: #98a3c2;
+  font-size: 11px;
+  font-weight: 650;
+  text-align: center;
+  transition:
+    color 140ms ease,
+    background 140ms ease;
+}
+
+.mode-option input:checked + span {
+  background: #312a62;
+  color: #eeeaff;
+}
+
+.mode-option input:focus-visible + span {
+  outline: 2px solid #a99cff;
+  outline-offset: 2px;
+}
+
+.mode-description {
+  min-height: 30px;
+  margin: 0 0 8px;
+  line-height: 1.45;
 }
 
 .controls {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+}
+
+.controls--single {
+  grid-template-columns: 1fr;
 }
 
 .nav-button {
@@ -93,6 +167,11 @@ h1 {
 .nav-button:disabled {
   cursor: not-allowed;
   opacity: 0.42;
+}
+
+.nav-button--wide {
+  min-height: 74px;
+  justify-content: center;
 }
 
 .arrow {
