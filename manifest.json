@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Tab Jumper",
+  "version": "1.0.0",
+  "description": "Move backward and forward through the tabs you actually visited.",
+  "minimum_chrome_version": "102",
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Tab Jumper",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "commands": {
+    "go-back-tab": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Left",
+        "mac": "Command+Shift+Left"
+      },
+      "description": "Jump to the previously visited tab"
+    },
+    "go-forward-tab": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Right",
+        "mac": "Command+Shift+Right"
+      },
+      "description": "Jump forward through visited tabs"
+    }
+  }
+}
