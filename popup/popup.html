@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tab Jumper</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="panel">
+      <header class="header">
+        <img class="logo" src="../icons/icon.svg" alt="" />
+        <div>
+          <h1>Tab Jumper</h1>
+          <p>Retrace the tabs you visited.</p>
+        </div>
+      </header>
+
+      <section class="controls" aria-label="Tab history controls">
+        <button id="back-button" class="nav-button" type="button">
+          <span class="arrow" aria-hidden="true">←</span>
+          <span class="button-copy">
+            <strong>Back</strong>
+            <kbd id="back-shortcut">Loading…</kbd>
+          </span>
+        </button>
+
+        <button id="forward-button" class="nav-button" type="button">
+          <span class="arrow" aria-hidden="true">→</span>
+          <span class="button-copy">
+            <strong>Forward</strong>
+            <kbd id="forward-shortcut">Loading…</kbd>
+          </span>
+        </button>
+      </section>
+
+      <div class="footer">
+        <p id="history-status" role="status">Reading tab history…</p>
+        <button id="shortcut-settings" class="text-button" type="button">
+          Change shortcuts
+        </button>
+      </div>
+    </main>
+
+    <script src="popup.js" type="module"></script>
+  </body>
+</html>

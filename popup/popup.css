@@ -1,0 +1,144 @@
+:root {
+  color-scheme: dark;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #0b1020;
+  color: #f7f8ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 340px;
+  margin: 0;
+  background:
+    radial-gradient(circle at top right, rgb(124 92 255 / 24%), transparent 45%),
+    #0b1020;
+}
+
+button {
+  font: inherit;
+}
+
+.panel {
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.logo {
+  width: 42px;
+  height: 42px;
+  filter: drop-shadow(0 8px 20px rgb(110 86 255 / 30%));
+}
+
+h1 {
+  margin: 0 0 2px;
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.header p,
+.footer p {
+  margin: 0;
+  color: #9ea8c7;
+  font-size: 12px;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.nav-button {
+  min-height: 88px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 14px;
+  border: 1px solid #293253;
+  border-radius: 14px;
+  background: rgb(24 31 57 / 88%);
+  color: #f7f8ff;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease;
+}
+
+.nav-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: #7564e8;
+  background: #222a4d;
+}
+
+.nav-button:focus-visible,
+.text-button:focus-visible {
+  outline: 2px solid #a99cff;
+  outline-offset: 2px;
+}
+
+.nav-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.arrow {
+  font-size: 28px;
+  line-height: 1;
+  color: #b8adff;
+}
+
+.button-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.button-copy strong {
+  font-size: 14px;
+}
+
+kbd {
+  overflow: hidden;
+  color: #aeb6d2;
+  font-family: inherit;
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 16px;
+}
+
+.text-button {
+  flex: 0 0 auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #b8adff;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.text-button:hover {
+  color: #d8d1ff;
+}
